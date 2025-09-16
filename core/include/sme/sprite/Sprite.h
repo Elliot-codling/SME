@@ -4,7 +4,6 @@
 class Sprite : public SharedData
 {
 public:
-    Sprite() = default;
     Sprite(const char* objectId, const char* textureDir, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer);
     Sprite(const char* objectId, const sf::Texture& textureFile, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer = 0);
     ~Sprite() override = default;

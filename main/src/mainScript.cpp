@@ -18,6 +18,17 @@ void runtimeState::start(Application &app)
     mySprite->setObjectVisible(true);
     mySprite->setOrigin({32, 32});
     mySprite->setOffset({32, 32});
+
+    //Logger::setMinLogLevel(LogLevel::Debug);
+
+    LOG_TRACE("mainScript.cpp", "Hello World!");
+    LOG_DEBUG("mainScript.cpp", "Hello World!");
+    LOG_INFO("mainScript.cpp", "Hello World!");
+    LOG_WARN("mainScript.cpp", "Hello World!");
+    LOG_ERROR("mainScript.cpp", "Hello World!");
+    LOG_FATAL("mainScript.cpp", "Hello World!");
+
+
 }
 
 void runtimeState::update(Application &app, const float deltaTime)
@@ -30,6 +41,12 @@ void runtimeState::update(Application &app, const float deltaTime)
             app.stopRunning();
         }
     }
+
+    app.updateDisplay();
+}
+
+void runtimeState::fixedUpdate(Application &app, const float deltaTime)
+{
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         mySprite->incrementPosition({-velocity * deltaTime, 0});
@@ -63,12 +80,6 @@ void runtimeState::update(Application &app, const float deltaTime)
     {
         mySprite->incrementAngle(rotationSpeed * deltaTime);
     }
-    app.updateDisplay();
-}
-
-void runtimeState::fixedUpdate(Application &app, const float deltaTime)
-{
-
 
 }
 

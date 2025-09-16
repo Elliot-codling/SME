@@ -7,3 +7,6 @@
 
 // Scene and Scene Manager
 #include <sme/scene/SceneManager.h>
+
+// Logging
+#include <sme/log/logging.h>
