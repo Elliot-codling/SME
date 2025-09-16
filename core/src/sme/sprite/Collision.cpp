@@ -1,4 +1,4 @@
-#include <SME/sprite/Sprite.h>
+#include <sme/sprite/Sprite.h>
 
 // This file is used to calculate the collision between the current object and the targeted object
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <SME/events/GameEvents.h>
-#include <SME/window/Renderer.h>
+#include <sme/events/GameEvents.h>
+#include <sme/window/Renderer.h>
 
 class Application : public GameEvents, Renderer
 {

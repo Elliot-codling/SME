@@ -1,4 +1,4 @@
-#include <SME/events/GameEvents.h>
+#include <sme/events/GameEvents.h>
 
 // Clear current events
 // Then gather new events happening in the window and store them to the queue

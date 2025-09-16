@@ -1,4 +1,4 @@
-#include <SME/window/Renderer.h>
+#include <sme/window/Renderer.h>
 #include <iostream>
 
 // Renders objects in the scene to the screen

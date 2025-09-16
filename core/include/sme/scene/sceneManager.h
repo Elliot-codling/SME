@@ -1,5 +1,5 @@
 #pragma once
-#include <SME/scene/Scene.h>
+#include <sme/scene/Scene.h>
 class SceneManager
 {
 public:

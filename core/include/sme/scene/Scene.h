@@ -1,6 +1,6 @@
 #pragma once
-#include <Sme/sprite/Sprite.h>
-#include <Sme/text/text.h>
+#include <sme/sprite/Sprite.h>
+#include <sme/text/text.h>
 class Scene
 {
 public:

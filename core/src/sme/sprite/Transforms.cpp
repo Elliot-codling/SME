@@ -1,4 +1,4 @@
-#include <SME/sprite/Sprite.h>
+#include <sme/sprite/Sprite.h>
 
 // ### Transforms ###
 // -- Position ---

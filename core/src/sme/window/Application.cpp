@@ -1,4 +1,4 @@
-#include <SME/window/Application.h>
+#include <sme/window/Application.h>
 
 // ### Lifetime ###
 void Application::createWindow(const char *titleName, int width, int height)

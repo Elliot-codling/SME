@@ -1,5 +1,5 @@
 #pragma once
-#include <SME/SharedObjectClass.h>
+#include <sme/SharedObjectClass.h>
 
 class Text : public SharedData
 {

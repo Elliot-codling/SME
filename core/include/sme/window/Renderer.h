@@ -1,6 +1,6 @@
 #pragma once
-#include <SME/sprite/Sprite.h>
-#include <SMe/scene/Scene.h>
+#include <sme/sprite/Sprite.h>
+#include <sme/scene/Scene.h>
 class Renderer
 {
 public:

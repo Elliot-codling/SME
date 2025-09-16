@@ -1,4 +1,4 @@
-#include <SME/sprite/Sprite.h>
+#include <sme/sprite/Sprite.h>
 
 // ### Constructor ###
 Sprite::Sprite(const char *objectId, const char *textureDir, const sf::Vector2f position, const sf::Vector2f size, const uint8_t objectLayer)

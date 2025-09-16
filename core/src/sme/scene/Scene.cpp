@@ -1,5 +1,5 @@
 #include <iostream>
-#include <SME/scene/Scene.h>
+#include <sme/scene/Scene.h>
 
 // ### Constructor ###
 Scene::Scene(const char* sceneName, const uint32_t vectorSize)

@@ -1,5 +1,5 @@
 #pragma once
-#include <SME/Sme.h>
+#include <sme/Sme.h>
 #include <iostream>
 class Runtime
 {
