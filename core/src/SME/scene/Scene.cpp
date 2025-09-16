@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SME/scene/Scene.h>
 
 // ### Constructor ###
@@ -6,6 +7,7 @@ Scene::Scene(const char* sceneName, const uint32_t vectorSize)
     // Set name and vector size
     m_sceneName = sceneName;
     m_spriteList.reserve(vectorSize);
+    m_spriteRenderList.reserve(vectorSize);
 }
 
 // ### Creation ###
@@ -23,6 +25,7 @@ Sprite* Scene::createSprite(const char* objectId, const char *textureDir, const 
     if (m_spriteList.size() >= m_spriteList.capacity()) {
         //printWarningInfo("Could not add new sprite, size has exceeded capacity.");
         // TODO: Add log
+        std::cerr << "Could not add new sprite.\n";
         return newSprite;
     }
 
@@ -37,6 +40,7 @@ Sprite* Scene::createSprite(const char* objectId, const sf::Texture &textureFile
     if (m_spriteList.size() >= m_spriteList.capacity()) {
         //printWarningInfo("Could not add new sprite, size has exceeded capacity.");
         // TODO: Add log
+        std::cerr << "Could not add new sprite.\n";
         return newSprite;
     }
 

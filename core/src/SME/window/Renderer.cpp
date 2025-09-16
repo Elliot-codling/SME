@@ -1,5 +1,5 @@
 #include <SME/window/Renderer.h>
-
+#include <iostream>
 
 // Renders objects in the scene to the screen
 void Renderer::renderScene(sf::RenderWindow& target, const sf::Color backgroundColor, Scene* scene)
@@ -9,8 +9,9 @@ void Renderer::renderScene(sf::RenderWindow& target, const sf::Color backgroundC
     // Create pointers to each queue
     const std::vector<Sprite>* spriteList = scene->getSpriteQueue();
     std::vector<Text>* textList = scene->getTextQueue();
-    const std::vector<size_t>* spriteRenderList = scene->getSpriteRenderList();
+    std::vector<size_t>* spriteRenderList = scene->getSpriteRenderList();
 
+    sortSpriteQueue(spriteList, spriteRenderList);
     // Render objects in the m_spriteList based on the order from the spriteRenderList
     for (const size_t objectIndex: (*spriteRenderList))
     {
@@ -26,7 +27,7 @@ void Renderer::renderScene(sf::RenderWindow& target, const sf::Color backgroundC
     target.display();
 }
 
-std::vector<size_t>* Renderer::sortSpriteQueue(std::vector<Sprite>* spriteList, std::vector<size_t>* spriteRenderList) {
+std::vector<size_t>* Renderer::sortSpriteQueue(const std::vector<Sprite>* spriteList, std::vector<size_t>* spriteRenderList) {
     // TODO: Only sort the queue if an objects layer has changed (dirty)
     if (!spriteList->empty())
     {

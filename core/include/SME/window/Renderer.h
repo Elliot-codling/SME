@@ -11,5 +11,5 @@ protected:
 
     // Sorts the size_t list based on layer numbers
 private:
-    static std::vector<size_t>* sortSpriteQueue(std::vector<Sprite>* spriteList, std::vector<size_t>* spriteRenderList);
+    static std::vector<size_t>* sortSpriteQueue(const std::vector<Sprite>* spriteList, std::vector<size_t>* spriteRenderList);
 };
