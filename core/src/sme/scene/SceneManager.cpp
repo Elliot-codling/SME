@@ -1,4 +1,4 @@
-#include <sme/scene/sceneManager.h>
+#include <sme/scene/SceneManager.h>
 Scene* SceneManager::createScene(const char* sceneName, const uint32_t vectorSize)
 {
     // EXPERIMENTAL
