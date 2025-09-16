@@ -3,31 +3,30 @@
 #include <sme/events/GameEvents.h>
 #include <sme/window/Renderer.h>
 
+#include "sme/log/logging.h"
+
 class Application : public GameEvents, Renderer
 {
 public:
     Application() = default;
     ~Application() override = default;
 
-    // ### Lifetime ###
-    void createWindow(const char* titleName, int width, int height);
+    // ### Lifetime Control ###
+    bool createWindow(const char* titleName, int width, int height);
     // --- Window state control ---
-    [[nodiscard]] bool isRunning() const { return m_windowIsOpen; }
-    void stopRunning() { m_windowIsOpen = false; }
+    [[nodiscard]] bool isRunning() const;
+    void stopRunning();
 
     // ### Game Events ###
-    void updateEvents() { GameEvents::updateEvents(m_window); }
-    bool getEvent(const sf::Event::EventType eventType) { return GameEvents::getEvent(m_windowIsOpen, eventType); }
+    void updateEvents();
+    bool getEvent(const sf::Event::EventType eventType);
     // --- Mouse Control ---
-    [[nodiscard]] sf::Vector2f getMousePos() { return GameEvents::getMousePos(m_window); }
+    [[nodiscard]] sf::Vector2f getMousePos();
 
     // ### Scene control ###
-    void setActiveScene(Scene* scene)
-    {
-        m_activeScene = scene;
-    }
+    void setActiveScene(Scene* scene);
     // ### Display control ###
-    void setBackgroundColor(sf::Color backgroundColor) { m_backgroundColor = backgroundColor; }
+    void setBackgroundColor(sf::Color backgroundColor);
     void updateDisplay();
 
 private:

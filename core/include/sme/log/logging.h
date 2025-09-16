@@ -49,7 +49,7 @@ public:
     }
 
 private:
-    static inline LogLevel minLevel = LogLevel::Trace;
+    static inline LogLevel minLevel = LogLevel::Debug;
 
     // Declare the templates for the class to use
     template<LogLevel level>

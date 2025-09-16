@@ -1,6 +1,6 @@
 #pragma once
 #include <sme/sprite/Sprite.h>
-#include <sme/text/text.h>
+#include <sme/text/Text.h>
 class Scene
 {
 public:
@@ -19,6 +19,9 @@ public:
     [[nodiscard]] std::vector<Sprite>* getSpriteQueue() { return &m_spriteList; }
     [[nodiscard]] std::vector<Text>* getTextQueue() { return &m_textList; }
     [[nodiscard]] std::vector<size_t>* getSpriteRenderList() { return &m_spriteRenderList; }
+
+    // Get scene info
+    [[nodiscard]] const char* getSceneName() const { return m_sceneName; }
 
     // Layers
     void clearLayer(uint16_t layerNumber);

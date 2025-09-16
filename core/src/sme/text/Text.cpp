@@ -1,4 +1,4 @@
-#include <sme/text/text.h>
+#include <sme/text/Text.h>
 
 // Text constructor ------------------------------------------------------------------------------
 Text::Text(const char* objectId, const char* message, const sf::Vector2f position, const char* fontDir, const uint8_t fontSize)

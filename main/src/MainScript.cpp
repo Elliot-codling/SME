@@ -1,5 +1,5 @@
 // Main code
-#include "../include/mainScript.h"
+#include "../include/MainScript.h"
 
 Sprite* mySprite;
 Scene* myScene;
@@ -18,16 +18,6 @@ void runtimeState::start(Application &app)
     mySprite->setObjectVisible(true);
     mySprite->setOrigin({32, 32});
     mySprite->setOffset({32, 32});
-
-    //Logger::setMinLogLevel(LogLevel::Debug);
-
-    LOG_TRACE("mainScript.cpp", "Hello World!");
-    LOG_DEBUG("mainScript.cpp", "Hello World!");
-    LOG_INFO("mainScript.cpp", "Hello World!");
-    LOG_WARN("mainScript.cpp", "Hello World!");
-    LOG_ERROR("mainScript.cpp", "Hello World!");
-    LOG_FATAL("mainScript.cpp", "Hello World!");
-
 
 }
 
@@ -85,5 +75,5 @@ void runtimeState::fixedUpdate(Application &app, const float deltaTime)
 
 void runtimeState::end()
 {
-
+    delete mySprite;
 }
