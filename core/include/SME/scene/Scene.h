@@ -1,5 +1,5 @@
 #pragma once
-#include <SME/sprite/Sprite.h>
+#include <Sme/sprite/Sprite.h>
 #include <Sme/text/text.h>
 class Scene
 {
