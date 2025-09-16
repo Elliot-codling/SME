@@ -1,0 +1,14 @@
+#Ignore everything
+/*
+
+#Except from the following files
+!.gitignore
+!README.md
+!LICENSE.txt
+!CMakeLists.txt
+
+#And the following folders
+!main/
+!core/
+!external/
+!temp/
