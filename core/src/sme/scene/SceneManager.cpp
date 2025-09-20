@@ -1,7 +1,7 @@
 #include <sme/scene/SceneManager.h>
 Scene* SceneManager::createScene(const char* sceneName, const uint32_t vectorSize)
 {
-    // EXPERIMENTAL
+    LOG_INFO("scene/SceneManager.cpp", "Creating new scene...");
     // TODO: Must get the vector size based on engine properties configurable by the user
     m_activeScene = new Scene(sceneName, vectorSize);
     return m_activeScene;

@@ -1,5 +1,6 @@
 #pragma once
 #include <sme/SharedObjectClass.h>
+#include <sme/log/logging.h>
 
 class Text : public SharedData
 {
@@ -11,21 +12,27 @@ public:
 
     // ### Transforms ###
     // --- Position ---
-    [[nodiscard]] sf::Vector2f getPosition() const { return { m_text.getGlobalBounds().left, m_text.getGlobalBounds().top }; }
-    [[nodiscard]] sf::Vector2f getSize() const { return { m_text.getLocalBounds().width, m_text.getLocalBounds().height }; }
+    // TODO: get position by getPosition() and another by getGlobalBounds()
+    [[nodiscard]] sf::Vector2f getPosition() const;
+    [[nodiscard]] sf::Vector2f getSize() const;
 
     void setPosition(sf::Vector2f position);
-    void incrementPosition(const sf::Vector2f position) { m_text.setPosition(m_text.getPosition().x + position.x, m_text.getPosition().y + position.y); }
-    // --- Rotation ---
+    void incrementPosition(sf::Vector2f position);
+
+    // Offset and Origin functions
     void setOrigin(sf::Vector2f origin);
-    void setAngle(const float angle) { m_text.setRotation(angle); }
-    void incrementAngle(const float angle) { m_text.rotate(angle); }
+    void setOffset(sf::Vector2f offset) override;
+    // --- Rotation ---
+
+    void setAngle(float angle);
+    void incrementAngle(float angle);
+
     // --- Scale ---
-    void setFontSize(const uint8_t fontSize) { m_text.setCharacterSize(fontSize); }
+    void setFontSize(const uint8_t fontSize);
 
 
     // ### Text ###
-    void updateString(const char* newMessage) { m_text.setString(newMessage); }
+    void updateString(const char* newMessage);
 
     // ### Render ###
     void render(sf::RenderTarget& target) const;

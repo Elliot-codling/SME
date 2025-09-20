@@ -3,8 +3,8 @@
 class SceneManager
 {
 public:
-    SceneManager() = default;
-    ~SceneManager() = default;
+    SceneManager() { LOG_TRACE("scene/SceneManager.h", "Creating 'SceneManager'"); }
+    ~SceneManager() { LOG_TRACE("scene/SceneManager.h", "Destroying 'SceneManager'"); }
 
     // ### Lifetime controls ###
     Scene* createScene(const char* sceneName, uint32_t vectorSize);

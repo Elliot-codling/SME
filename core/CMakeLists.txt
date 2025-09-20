@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
 project(SME)
-set(CMAKE_CXX_STANDARD 17)
 
 # Build SFML from source in external/src (explicit binary dir to avoid error)
 add_subdirectory(${CMAKE_SOURCE_DIR}/external/sfml ${CMAKE_BINARY_DIR}/external/sfml-build)

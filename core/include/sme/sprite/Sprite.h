@@ -1,40 +1,44 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <sme/SharedObjectClass.h>
+#include <sme/log/logging.h>
+
 class Sprite : public SharedData
 {
 public:
     Sprite(const char* objectId, const char* textureDir, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer);
     Sprite(const char* objectId, const sf::Texture& textureFile, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer = 0);
-    ~Sprite() override = default;
+    ~Sprite() override;
 
     // ### Transforms ###
     // -- Position ---
-    [[nodiscard]] sf::Vector2f getPosition() const { return m_sprite.getPosition() - getOffset(); };		// <-- Not affected by rotation
-    [[nodiscard]] sf::Vector2f getGlobalPosition() const { return { m_sprite.getGlobalBounds().left, m_sprite.getGlobalBounds().top }; }
+    [[nodiscard]] sf::Vector2f getPosition() const;;		// <-- Not affected by rotation
+    [[nodiscard]] sf::Vector2f getGlobalPosition() const;
 
-    void setPosition(const sf::Vector2f position) { m_sprite.setPosition(position.x + getOffset().x, position.y + getOffset().y); }
-    void incrementPosition(const sf::Vector2f position) { m_sprite.setPosition(m_sprite.getPosition().x + position.x, m_sprite.getPosition().y + position.y); }
+    void setPosition(sf::Vector2f position);
+    void incrementPosition(sf::Vector2f position);
+
     // Offset values and origin values
     void setOffset(sf::Vector2f objectOffset) override;
     void setOrigin(sf::Vector2f origin);
 
     // --- Rotation ---
-    [[nodiscard]] float getAngle() const { return m_sprite.getRotation(); }
-    void setAngle(const float angle) { m_sprite.setRotation(angle); }
-    void incrementAngle(const float angle) { m_sprite.rotate(angle); }
+    [[nodiscard]] float getAngle() const;
+    void setAngle(float angle);
+    void incrementAngle(float angle);
 
     // --- Scale ---
-    [[nodiscard]] sf::Vector2f getSize() const { return {static_cast<float>(m_texture->getSize().x) * m_sprite.getScale().x, static_cast<float>(m_texture->getSize().y) * m_sprite.getScale().y};} // <-- Not affected by rotation
-    [[nodiscard]] sf::Vector2f getGlobalSize() const { return { m_sprite.getGlobalBounds().width, m_sprite.getGlobalBounds().height }; }
+    [[nodiscard]] sf::Vector2f getSize() const; // <-- Not affected by rotation
+    [[nodiscard]] sf::Vector2f getGlobalSize() const;
     void setSize(sf::Vector2f size);
 
     // ### Collision ###
     // Virtual border checks
-    [[nodiscard]] static bool leftBorder(const sf::Vector2i relativePosition, const int borderLeft) { return relativePosition.x >= borderLeft; }
-    [[nodiscard]] static bool rightBorder(const sf::Vector2i relativePosition, const int borderRight) { return relativePosition.x <= borderRight; }
-    [[nodiscard]] static bool topBorder(const sf::Vector2i relativePosition, const int borderTop) { return relativePosition.y >= borderTop; }
-    [[nodiscard]] static bool bottomBorder(const sf::Vector2i relativePosition, const int borderBottom) { return relativePosition.y <= borderBottom; }
+    [[nodiscard]] bool leftBorder(sf::Vector2i relativePosition, int borderLeft) const;
+    [[nodiscard]] bool rightBorder(sf::Vector2i relativePosition, int borderRight) const;
+    [[nodiscard]] bool topBorder(sf::Vector2i relativePosition, int borderTop) const;
+    [[nodiscard]] bool bottomBorder(sf::Vector2i relativePosition, int borderBottom) const;
+
     // Simple AABB collision
     std::string collisionBox(const Sprite* object) const;
     // ### Debugging tools ###

@@ -2,6 +2,7 @@
 #include "../include/MainScript.h"
 
 Sprite* mySprite;
+Text* myText;
 Scene* myScene;
 
 float velocity = 200.f;
@@ -10,20 +11,20 @@ float sizeFactor = 0.9f;
 void runtimeState::start(Application &app)
 {
     myScene = sceneManager.createScene("main", 500);
-    app.setActiveScene(myScene);            // TODO: Make a log saying about if a scene is active or not. IF NOT abort render and mention error
-    Text* myText = myScene->createText("text", "Hello World!", {10, 10}, "assets/font/SegoeMarker.ttf", 30);
+    //app.setActiveScene(myScene);            // TODO: Make a log saying about if a scene is active or not. IF NOT abort render and mention error
+    myText = myScene->createText("text", "Hello World!", {0, 0}, "assets/font/SegoeMarker.ttf", 60);
     myText->setObjectVisible(true);
+    //myText->setOrigin({myText->getSize().x / 2, myText->getSize().y / 2});
+    //myText->setOffset({myText->getSize().x / 2, myText->getSize().y / 2});
+    //myText->setAngle(90);
 
-    mySprite = myScene->createSprite("player", "assets/textures/spaceship.png", {10, 10}, {64, 64});
-    mySprite->setObjectVisible(true);
-    mySprite->setOrigin({32, 32});
-    mySprite->setOffset({32, 32});
+    //mySprite = myScene->createSprite("player", "assets/textures/spaceship.png", myText->getPosition(), myText->getSize());
+    //mySprite->setObjectVisible(true);
 
 }
 
 void runtimeState::update(Application &app, const float deltaTime)
 {
-    app.updateEvents();
     if (app.getEvent(sf::Event::KeyPressed))
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -31,27 +32,25 @@ void runtimeState::update(Application &app, const float deltaTime)
             app.stopRunning();
         }
     }
-
-    app.updateDisplay();
 }
 
 void runtimeState::fixedUpdate(Application &app, const float deltaTime)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        mySprite->incrementPosition({-velocity * deltaTime, 0});
+        myText->incrementPosition({-velocity * deltaTime, 0});
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        mySprite->incrementPosition({velocity * deltaTime, 0});
+        myText->incrementPosition({velocity * deltaTime, 0});
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        mySprite->incrementPosition({0, -velocity * deltaTime});
+        myText->incrementPosition({0, -velocity * deltaTime});
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        mySprite->incrementPosition({0, velocity * deltaTime});
+        myText->incrementPosition({0, velocity * deltaTime});
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
@@ -64,11 +63,11 @@ void runtimeState::fixedUpdate(Application &app, const float deltaTime)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        mySprite->incrementAngle(-rotationSpeed * deltaTime);
+        myText->incrementAngle(-rotationSpeed * deltaTime);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        mySprite->incrementAngle(rotationSpeed * deltaTime);
+        myText->incrementAngle(rotationSpeed * deltaTime);
     }
 
 }
@@ -76,4 +75,5 @@ void runtimeState::fixedUpdate(Application &app, const float deltaTime)
 void runtimeState::end()
 {
     delete mySprite;
+    delete myText;
 }

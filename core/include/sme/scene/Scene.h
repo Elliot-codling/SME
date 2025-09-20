@@ -5,7 +5,7 @@ class Scene
 {
 public:
     Scene(const char* sceneName, uint32_t vectorSize);
-    ~Scene() = default;
+    ~Scene() { LOG_TRACE("scene/Scene.h", std::format("Destroying object with ID={}", m_sceneName)); }
 
     // ### Creation ###
     // --- Sprite ---
@@ -16,12 +16,12 @@ public:
     [[nodiscard]] Text* createText(const char* objectId, const char* message, sf::Vector2f position, const sf::Font& fontFile, uint8_t fontSize);
 
     // Return vectors
-    [[nodiscard]] std::vector<Sprite>* getSpriteQueue() { return &m_spriteList; }
-    [[nodiscard]] std::vector<Text>* getTextQueue() { return &m_textList; }
-    [[nodiscard]] std::vector<size_t>* getSpriteRenderList() { return &m_spriteRenderList; }
+    [[nodiscard]] std::vector<Sprite>* getSpriteQueue();
+    [[nodiscard]] std::vector<Text>* getTextQueue();
+    [[nodiscard]] std::vector<size_t>* getSpriteRenderQueue();
 
     // Get scene info
-    [[nodiscard]] const char* getSceneName() const { return m_sceneName; }
+    [[nodiscard]] const char* getSceneName() const;
 
     // Layers
     void clearLayer(uint16_t layerNumber);

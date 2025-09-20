@@ -3,17 +3,17 @@
 // ### Lifetime Control ###
 bool Application::createWindow(const char *titleName, const int width, const int height)
 {
-    LOG_TRACE("Application.h", "'createWindow() requested'");
+    LOG_TRACE("window/Application.cpp", "'createWindow()' requested");
     m_window.create(sf::VideoMode(width, height, 32), titleName);
     // Check if window is able to open
     if (m_window.isOpen())
     {
-        LOG_INFO("Application.h", "Successfully created SFML window: " + std::string(titleName));
+        LOG_INFO("window/Application.cpp", "Successfully created SFML window: " + std::string(titleName));
         m_windowIsOpen = true;
         return true;
     }
     // Return false to stop program from running. Safe crash.
-    LOG_FATAL("Application.h", "Cannot create window. Aborting.");
+    LOG_FATAL("window/Application.cpp", "Cannot create window. Aborting.");
     m_windowIsOpen = false;
     return false;
 
@@ -21,13 +21,13 @@ bool Application::createWindow(const char *titleName, const int width, const int
 
 bool Application::isRunning() const
 {
-    LOG_TRACE("Application.h", "'isRunning()' requested");
+    LOG_TRACE("window/Application.cpp", std::format("'isRunning()' requested (bool={})", m_windowIsOpen));
     return m_windowIsOpen;
 }
 
 void Application::stopRunning()
 {
-    LOG_TRACE("Application.h", "'stopRunning()' requested");
+    LOG_TRACE("window/Application.cpp", "'stopRunning()' requested");
     m_windowIsOpen = false;
 }
 
@@ -39,40 +39,46 @@ void Application::stopRunning()
 // ### Game Events ###
 void Application::updateEvents()
 {
-    LOG_TRACE("Application.h", "'updateEvents()' requested");
-    GameEvents::updateEvents(m_window);
+    LOG_TRACE("window/Application.cpp", "'updateEvents()' requested");
+    WindowEvents::updateEvents(m_window);
 }
 
 bool Application::getEvent(const sf::Event::EventType eventType)
 {
-    LOG_TRACE("Application.h", "'getEvent()' requested");
-    return GameEvents::getEvent(m_windowIsOpen, eventType);
+    LOG_TRACE("window/Application.cpp", "'getEvent()' requested");
+    return WindowEvents::getEvent(m_windowIsOpen, eventType);
 }
 
 sf::Vector2f Application::getMousePos()
 {
-    LOG_TRACE("Application.h", "'getMousePos()' requested");
-    return GameEvents::getMousePos(m_window);
+    LOG_TRACE("window/Application.cpp", "'getMousePos()' requested");
+    return WindowEvents::getMousePos(m_window);
 }
 // -------------------
 
 
 
 // ### Scene control ###
-void Application::setActiveScene(Scene *scene)
+Scene* Application::getActiveScene() const
 {
-    LOG_TRACE("Application.h", "Created new scene: " + std::string(scene->getSceneName()));
+    LOG_TRACE("window/Application.cpp", std::format("'getActiveScene()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));
+    return m_activeScene;
+}
+void Application::setActiveScene(Scene* scene)
+{
+    LOG_TRACE("window/Application.cpp", std::format("'setActiveScene()' requested (scene={})", scene->getSceneName()));
     m_activeScene = scene;
 }
 
 // ### Display control ###
 void Application::setBackgroundColor(const sf::Color backgroundColor)
 {
-    LOG_TRACE("Application.h", "'setBackgroundColor()' requested");
+    LOG_TRACE("window/Application.cpp", std::format("'setBackgroundColor()' requested (color=r:{},g:{},b:{},a:{})", backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a));
     m_backgroundColor = backgroundColor;
 }
 
 void Application::updateDisplay()
 {
+    LOG_TRACE("window/Application.cpp", std::format("'updateDisplay()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));
     Renderer::renderScene(m_window, m_backgroundColor, m_activeScene);
 }

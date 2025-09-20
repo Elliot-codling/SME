@@ -5,7 +5,7 @@ class Runtime
 {
 public:
     Runtime(const char* titleName, int width, int height);
-    ~Runtime() = default;
+    ~Runtime() { LOG_TRACE("runtime/Runtime.h", "Destroying 'Runtime'"); }
 
     void update();
     void end();

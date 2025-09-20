@@ -1,15 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <sme/events/GameEvents.h>
+#include <sme/events/WindowEvents.h>
 #include <sme/window/Renderer.h>
+#include <sme/log/logging.h>
 
-#include "sme/log/logging.h"
-
-class Application : public GameEvents, Renderer
+class Application : public WindowEvents, Renderer
 {
 public:
-    Application() = default;
-    ~Application() override = default;
+    Application() { LOG_TRACE("window/Application.h", "Creating 'Application'"); }
+    ~Application() override { LOG_TRACE("window/Application.h", "Destroying 'Application'"); };
 
     // ### Lifetime Control ###
     bool createWindow(const char* titleName, int width, int height);
@@ -24,7 +23,9 @@ public:
     [[nodiscard]] sf::Vector2f getMousePos();
 
     // ### Scene control ###
+    Scene* getActiveScene() const;
     void setActiveScene(Scene* scene);
+
     // ### Display control ###
     void setBackgroundColor(sf::Color backgroundColor);
     void updateDisplay();
@@ -32,7 +33,7 @@ public:
 private:
     // Variables
     sf::RenderWindow m_window;
-    bool m_windowIsOpen;
+    bool m_windowIsOpen = false;
 
     // Display settings
     sf::Color m_backgroundColor;

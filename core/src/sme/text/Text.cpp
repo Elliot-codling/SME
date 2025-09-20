@@ -4,9 +4,10 @@
 Text::Text(const char* objectId, const char* message, const sf::Vector2f position, const char* fontDir, const uint8_t fontSize)
 {
     setId(objectId);
+    LOG_TRACE("text/Text.cpp", std::format("Created 'Text' with ID={}", objectId));
     if (!m_font->loadFromFile(fontDir))
     {
-        // TODO: Add log
+        // TODO: To be replaced by asset manager
         return;
     }
 
@@ -25,6 +26,7 @@ Text::Text(const char* objectId, const char* message, const sf::Vector2f positio
 Text::Text(const char* objectId, const char* message, const sf::Vector2f position, const sf::Font& fontFile, const uint8_t fontSize)
 {
     setId(objectId);
+    LOG_TRACE("text/Text.cpp", std::format("Created 'Text' with ID={}", objectId));
     *m_font = fontFile;
 
     m_text.setFont(*m_font);
@@ -40,27 +42,23 @@ Text::Text(const char* objectId, const char* message, const sf::Vector2f positio
 
 Text::~Text()
 {
+    LOG_TRACE("text/Text.cpp", std::format("Destroying object with ID={}", getId()));
     //De-initialise object
     destroyObject();
     delete m_font;
 }
 
-void Text::setPosition(const sf::Vector2f position)
+// ### Text ###
+void Text::updateString(const char *newMessage)
 {
-    sf::Vector2f offSet;
-    offSet.x = { m_text.getGlobalBounds().left - m_text.getPosition().x };
-    offSet.y = { m_text.getGlobalBounds().top - m_text.getPosition().y };
-
-    m_text.setPosition({ position.x - offSet.x, position.y - offSet.y });
+    LOG_TRACE("text/Text.cpp", std::format("'updateString()' requested (ID={}) (message={})", getId(), newMessage));
+    m_text.setString(newMessage);
 }
 
-void Text::setOrigin(const sf::Vector2f origin)
-{
-    m_text.setOrigin(origin.x, origin.y);
-}
-
+// ### Render ###
 void Text::render(sf::RenderTarget& target) const
 {
+    LOG_TRACE("text/Text.cpp", std::format("'render()' requested (ID={})", getId()));
     if (!isObjectVisible())
     {
         return;

@@ -1,7 +1,7 @@
 # Setup project
 cmake_minimum_required(VERSION 3.14)
 project(setup)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 # Set the binary exe file to a bin folder inside of the build folder
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

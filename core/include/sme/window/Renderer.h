@@ -1,10 +1,12 @@
 #pragma once
 #include <sme/sprite/Sprite.h>
 #include <sme/scene/Scene.h>
+#include <sme/log/logging.h>
 class Renderer
 {
 public:
-    virtual ~Renderer() = default;
+    Renderer() { LOG_TRACE("window/Renderer.h", "Creating 'Renderer'"); }
+    virtual ~Renderer() { LOG_TRACE("window/Renderer.h", "Destroying 'Renderer'"); };
 protected:
     // Inherited by the GraceEngine class but not overwritten
     virtual void renderScene(sf::RenderWindow& target, sf::Color backgroundColor, Scene* scene);

@@ -15,6 +15,8 @@ constexpr auto c_YELLOW = "\033[93m"; // Warning
 constexpr auto c_RED_WARNING = "\033[91m"; // Error
 constexpr auto c_RED_FATAL = "\033[1;101m"; // Fatal
 
+// TODO: Add a filter to show specific processes only
+// TODO: Add a performance profiler
 // Output layout
 //[TIMESTAMP] [Process] [Log Level] : Content
 
@@ -139,3 +141,5 @@ inline std::string Logger::getTimestamp() {
 #define LOG_ERROR(process, content)
 #define LOG_FATAL(process, content)
 #endif
+
+// TODO: Add assert
