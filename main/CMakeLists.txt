@@ -28,5 +28,5 @@ target_link_libraries(main PRIVATE SME)
 add_custom_command(
         TARGET main POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/main/assets ${CMAKE_BINARY_DIR}/bin/assets
+        ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/bin/assets
 )

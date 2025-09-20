@@ -1,1 +1,0 @@
-All textures can go in this folder.
