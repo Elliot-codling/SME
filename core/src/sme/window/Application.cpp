@@ -76,7 +76,11 @@ void Application::setBackgroundColor(const sf::Color backgroundColor)
     LOG_TRACE("window/Application.cpp", std::format("'setBackgroundColor()' requested (color=r:{},g:{},b:{},a:{})", backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a));
     m_backgroundColor = backgroundColor;
 }
-
+void Application::updateBlankDisplay()
+{
+    LOG_TRACE("window/Application.cpp", std::format("'updateBlankDisplay()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));
+    Renderer::renderBlankScene(m_window, m_backgroundColor);
+}
 void Application::updateDisplay()
 {
     LOG_TRACE("window/Application.cpp", std::format("'updateDisplay()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));

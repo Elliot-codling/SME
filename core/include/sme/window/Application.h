@@ -28,6 +28,8 @@ public:
 
     // ### Display control ###
     void setBackgroundColor(sf::Color backgroundColor);
+    // Nothing is rendered, only empty display to prevent engine crash
+    void updateBlankDisplay();
     void updateDisplay();
 
 private:

@@ -5,6 +5,7 @@
 #include <chrono>
 #include <iomanip>
 #include <sstream>
+#include <unordered_set>
 
 // ### Log colour codes ###
 constexpr auto c_DEFAULT = "\033[39;49m";
@@ -32,15 +33,22 @@ enum class LogLevel {
 class Logger
 {
 public:
-    static void setMinLogLevel(LogLevel level) { minLevel = level; }
+    static void setMinLogLevel(LogLevel level) { m_minLevel = level; }
 
     template<LogLevel level, typename A, typename B>
     // Take in any value with templates
     static void log(const A &process, const B &content)
     {
-        if (level < minLevel)
+        // Make the keys unique to prevent important logs from being suppressed
+        const std::string key = std::to_string(static_cast<int>(level)) + ":" + process + ":" + content;
+        if (level < m_minLevel)
         {
             // Do not print anything under the specified log level
+            return;
+        }
+        if (!m_loggedMessages.insert(key).second)
+        {
+            // If the key is not unique, do not print
             return;
         }
 
@@ -49,9 +57,14 @@ public:
                   << getLevelName<level>() << "] : "
                   << content << c_DEFAULT << std::endl;
     }
+    static void clearLoggedMessages()
+    {
+        m_loggedMessages.clear();
+    }
 
 private:
-    static inline LogLevel minLevel = LogLevel::Debug;
+    static inline std::unordered_set<std::string> m_loggedMessages;
+    static inline LogLevel m_minLevel = LogLevel::Debug;
 
     // Declare the templates for the class to use
     template<LogLevel level>
@@ -118,6 +131,7 @@ inline std::string Logger::getTimestamp() {
 
 // ### Macro setup ###
 #ifndef NDEBUG
+#define CLEAR_LOGGED_MESSAGES          Logger::clearLoggedMessages()
 #define LOG_TRACE(process, content)    Logger::log<LogLevel::Trace>(process, content)
 #define LOG_DEBUG(process, content)    Logger::log<LogLevel::Debug>(process, content)
 #define LOG_INFO(process, content)     Logger::log<LogLevel::Info>(process, content)
@@ -125,6 +139,7 @@ inline std::string Logger::getTimestamp() {
 #define LOG_ERROR(process, content)    Logger::log<LogLevel::Error>(process, content)
 #define LOG_FATAL(process, content)    Logger::log<LogLevel::Fatal>(process, content)
 #elif (_DEBUG)
+#define CLEAR_LOGGED_MESSAGES()        Logging::clearLoggedMessages()
 #define LOG_TRACE(process, content)    Logger::log<LogLevel::Trace>(process, content)
 #define LOG_DEBUG(process, content)    Logger::log<LogLevel::Debug>(process, content)
 #define LOG_INFO(process, content)     Logger::log<LogLevel::Info>(process, content)
@@ -134,6 +149,7 @@ inline std::string Logger::getTimestamp() {
 
 // Remove macros if not in debug mode for gcc/clang/msvc
 #else
+#define CLEAR_LOGGED_MESSAGES()
 #define LOG_TRACE(process, content)
 #define LOG_DEBUG(process, content)
 #define LOG_INFO(process, content)

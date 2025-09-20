@@ -31,6 +31,14 @@ void Renderer::renderScene(sf::RenderWindow& target, const sf::Color backgroundC
     target.display();
 }
 
+void Renderer::renderBlankScene(sf::RenderWindow &target, const sf::Color backgroundColor)
+{
+    LOG_TRACE("window/Renderer.cpp", "'renderBlankScene()' requested");
+    target.clear(backgroundColor);
+    LOG_TRACE("window/Renderer.cpp", "Updating display");
+    target.display();
+}
+
 std::vector<size_t>* Renderer::sortSpriteQueue(const std::vector<Sprite>* spriteList, std::vector<size_t>* spriteRenderList)
 {
     // TODO: Only sort the queue if an objects layer has changed (dirty)

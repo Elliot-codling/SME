@@ -10,6 +10,7 @@ public:
 protected:
     // Inherited by the GraceEngine class but not overwritten
     virtual void renderScene(sf::RenderWindow& target, sf::Color backgroundColor, Scene* scene);
+    virtual void renderBlankScene(sf::RenderWindow& target, sf::Color backgroundColor);
 
     // Sorts the size_t list based on layer numbers
 private:

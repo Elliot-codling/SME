@@ -33,10 +33,10 @@ void Runtime::update()
         runtimeState::update(m_app, m_timeElapsed.asSeconds());
         if (m_app.getActiveScene() == nullptr)
         {
-            // Execute a safe shutdown
-            LOG_FATAL("runtime/Runtime.cpp", "No active scene present. Aborting.");
-            m_app.stopRunning();
-            return;
+            // Notify dev no scene is currently active
+            LOG_WARN("runtime/Runtime.cpp", "No active scene present");
+            m_app.updateBlankDisplay();
+            continue;
         }
         m_app.updateDisplay();
     }
