@@ -20,30 +20,12 @@ Scene::Scene(const char* sceneName, const uint32_t vectorSize)
  * 3. Else, add sprite to queue as well as the index.
  * 4. Return the memory location of the new sprite.
  */
-Sprite* Scene::createSprite(const char* objectId, const char *textureDir, const sf::Vector2f position, const sf::Vector2f size, const uint8_t objectLayer)
-{
-    LOG_TRACE("scene/Scene.cpp", std::format("Created 'Sprite' with ID={}", objectId));
-    auto* newSprite = new Sprite(objectId, textureDir, position, size, objectLayer);
-    if (m_spriteList.size() >= m_spriteList.capacity()) {
-        //printWarningInfo("Could not add new sprite, size has exceeded capacity.");
-        // TODO: Add log
-        std::cerr << "Could not add new sprite.\n";
-        return newSprite;
-    }
-
-    m_spriteList.emplace_back(*newSprite);
-    m_spriteRenderList.emplace_back(m_spriteList.size() - 1);
-    return &m_spriteList.back();
-}
-
-Sprite* Scene::createSprite(const char* objectId, const sf::Texture &textureFile, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer)
+Sprite* Scene::createSprite(const char* objectId, sf::Texture* textureFile, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer)
 {
     LOG_TRACE("scene/Scene.cpp", std::format("Created 'Sprite' with ID={}", objectId));
     auto* newSprite = new Sprite(objectId, textureFile, position, size, objectLayer);
     if (m_spriteList.size() >= m_spriteList.capacity()) {
-        //printWarningInfo("Could not add new sprite, size has exceeded capacity.");
-        // TODO: Add log
-        std::cerr << "Could not add new sprite.\n";
+        LOG_ERROR("","");
         return newSprite;
     }
 
@@ -60,17 +42,15 @@ Sprite* Scene::createSprite(const char* objectId, const sf::Texture &textureFile
  * 3. Return the memory location of the TextObject.
  */
 
-Text* Scene::createText(const char* objectId, const char* message, const sf::Vector2f position, const char* fontDir, const uint8_t fontSize)
+Text* Scene::createText(const char* objectId, const char* message, const sf::Vector2f position, sf::Font* fontFile, const uint8_t fontSize)
 {
     LOG_TRACE("scene/Scene.cpp", std::format("Created 'Text' with ID={}", objectId));
-    m_textList.emplace_back(objectId, message, position, fontDir, fontSize);
-    return &m_textList.back();
-}
-
-Text* Scene::createText(const char* objectId, const char* message, const sf::Vector2f position, const sf::Font &fontFile, const uint8_t fontSize)
-{
-    LOG_TRACE("scene/Scene.cpp", std::format("Created 'Text' with ID={}", objectId));
-    m_textList.emplace_back(objectId, message, position, fontFile, fontSize);
+    auto* newText = new Text(objectId, message, position, fontFile, fontSize);
+    if (!newText->isInitialised())
+    {
+        return newText;
+    }
+    m_textList.emplace_back(*newText);
     return &m_textList.back();
 }
 

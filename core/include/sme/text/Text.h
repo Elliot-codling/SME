@@ -6,8 +6,7 @@ class Text : public SharedData
 {
 public:
     // Constructor
-    Text(const char* objectId, const char* message, sf::Vector2f position, const char* fontDir, uint8_t fontSize);
-    Text(const char* objectId, const char* message, sf::Vector2f position, const sf::Font& fontFile, uint8_t fontSize);
+    Text(const char* objectId, const char* message, sf::Vector2f position, sf::Font* fontFile, uint8_t fontSize);
     ~Text() override;
 
     // ### Transforms ###
@@ -39,6 +38,6 @@ public:
 
 private:
     // Store font and text as ptr
-    sf::Font* m_font = new sf::Font;
+    sf::Font* m_font;
     sf::Text m_text;
 };

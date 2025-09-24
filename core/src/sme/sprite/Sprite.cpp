@@ -1,17 +1,11 @@
 #include <sme/sprite/Sprite.h>
 
 // ### Constructor ###
-Sprite::Sprite(const char *objectId, const char *textureDir, const sf::Vector2f position, const sf::Vector2f size, const uint8_t objectLayer)
+Sprite::Sprite(const char* objectId, sf::Texture* textureFile, const sf::Vector2f position, const sf::Vector2f size, const uint8_t objectLayer)
 {
     setId(objectId);
     LOG_TRACE("sprite/Sprite.cpp", std::format("Created 'Sprite' with ID={}", objectId));
-    // Load the texture from the dir provided
-    if (!m_texture->loadFromFile(textureDir))
-    {
-        // TODO: To be replaced by asset manager
-        return;
-    }
-
+    m_texture = textureFile;
     // Apply texture and position
     m_sprite.setTexture(*m_texture);
     m_sprite.setPosition(position);
@@ -22,26 +16,9 @@ Sprite::Sprite(const char *objectId, const char *textureDir, const sf::Vector2f 
     // Once all passed have checked, the object has successfully initialised
     initialiseObject();
 }
-
-Sprite::Sprite(const char* objectId, const sf::Texture& textureFile, const sf::Vector2f position, const sf::Vector2f size, const uint8_t objectLayer)
-{
-    setId(objectId);
-    LOG_TRACE("sprite/Sprite.cpp", std::format("Created 'Sprite' with ID={}", objectId));
-    // Apply texture and position
-    m_sprite.setTexture(textureFile);
-    m_sprite.setPosition(position);
-
-    setSize(size);
-    setLayerNumber(objectLayer);
-
-    // Once all passed have checked, the object has successfully initialised
-    initialiseObject();
-}
-
 Sprite::~Sprite()
 {
     LOG_TRACE("sprite/Sprite.cpp", std::format("Destroying object with ID={}", getId()));
-    delete m_texture;
     destroyObject();
 }
 

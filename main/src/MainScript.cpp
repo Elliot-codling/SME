@@ -11,14 +11,13 @@ float sizeFactor = 0.9f;
 void runtimeState::start(Application &app)
 {
     myScene = sceneManager.createScene("main", 500);
-    //app.setActiveScene(myScene);
-    myText = myScene->createText("text", "Hello World!", {0, 0}, "assets/font/SegoeMarker.ttf", 60);
+    app.setActiveScene(myScene);
+    myText = myScene->createText("text", "Hello World!", {0, 0}, Resources.loadFont("assets/font/SegoeMarker.ttf"), 60);
     myText->setObjectVisible(true);
 
-    mySprite = myScene->createSprite("player", "assets/textures/spaceship.png", {10, 10}, {64, 64});
+    mySprite = myScene->createSprite("player", Resources.loadTexture("assets/textures/spaceship.png"), {10, 10}, {64, 64});
     mySprite->setObjectVisible(true);
-
-
+    //app.stopRunning();
 }
 
 void runtimeState::update(Application &app, const float deltaTime)

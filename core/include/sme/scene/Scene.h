@@ -9,11 +9,9 @@ public:
 
     // ### Creation ###
     // --- Sprite ---
-    [[nodiscard]] Sprite* createSprite(const char* objectId, const char* textureDir, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer = 0);
-    [[nodiscard]] Sprite* createSprite(const char* objectId, const sf::Texture& textureFile, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer = 0);
+    [[nodiscard]] Sprite* createSprite(const char* objectId, sf::Texture* textureFile, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer = 0);
     // --- Text ---
-    [[nodiscard]] Text* createText(const char* objectId, const char* message, sf::Vector2f position, const char* fontDir, uint8_t fontSize);
-    [[nodiscard]] Text* createText(const char* objectId, const char* message, sf::Vector2f position, const sf::Font& fontFile, uint8_t fontSize);
+    [[nodiscard]] Text* createText(const char* objectId, const char* message, sf::Vector2f position, sf::Font* fontFile, uint8_t fontSize);
 
     // Return vectors
     [[nodiscard]] std::vector<Sprite>* getSpriteQueue();

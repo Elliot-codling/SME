@@ -1,14 +1,20 @@
-#Ignore everything
+# Ignore everything
 /*
 
-#Except from the following files
+# Except from the following files
 !.gitignore
 !README.md
 !LICENSE.txt
 !CMakeLists.txt
 
-#And the following folders
+# And the following folders
+# main - Application written here
+# core - Library code that the Application uses
+# external - Code, assets and non in-house generated content stored here
+# assets - User generated content to be stored here
+
 !main/
 !core/
 !external/
 !assets/
+!thirdparty/

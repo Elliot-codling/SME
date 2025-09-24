@@ -1,6 +1,8 @@
 #pragma once
 #include <sme/Sme.h>
 
+#include "sme/assetMan/AssetManager.h"
+
 namespace runtimeState
 {
     void start(Application &app);
@@ -10,3 +12,4 @@ namespace runtimeState
 }
 
 inline SceneManager sceneManager;
+inline AssetManager Resources;

@@ -18,9 +18,9 @@ constexpr auto c_RED_FATAL = "\033[1;101m"; // Fatal
 
 // TODO: Add a filter to show specific processes only
 // TODO: Add a performance profiler
-// Output layout
-//[TIMESTAMP] [Process] [Log Level] : Content
+// TODO: Add assert
 
+// ### Emums ###
 enum class LogLevel {
     Trace,
     Debug,
@@ -33,12 +33,15 @@ enum class LogLevel {
 class Logger
 {
 public:
-    static void setMinLogLevel(LogLevel level) { m_minLevel = level; }
+    static void setMinLogLevel(const LogLevel level) { m_minLevel = level; }
+    static void setTraceRepeatMessages(const bool value) { m_repeatTraceMessages = value; }
+    static void clearLoggedMessages() { m_loggedMessages.clear(); }
 
     template<LogLevel level, typename A, typename B>
     // Take in any value with templates
     static void log(const A &process, const B &content)
     {
+        // TODO: Move into private function in cpp
         // Make the keys unique to prevent important logs from being suppressed
         const std::string key = std::to_string(static_cast<int>(level)) + ":" + process + ":" + content;
         if (level < m_minLevel)
@@ -46,20 +49,26 @@ public:
             // Do not print anything under the specified log level
             return;
         }
+
+        // Check if it is not unique
         if (!m_loggedMessages.insert(key).second)
         {
-            // If the key is not unique, do not print
-            return;
+            // Check if level is not Trace
+            if (level != LogLevel::Trace)
+            {
+                return;
+            }
+            // Check if repeat message is not true
+            if (!m_repeatTraceMessages)
+            {
+                return;
+            }
         }
 
         std::cout << getColor<level>()
                   << getTimestamp() << process << "] ["
                   << getLevelName<level>() << "] : "
                   << content << c_DEFAULT << std::endl;
-    }
-    static void clearLoggedMessages()
-    {
-        m_loggedMessages.clear();
     }
 
 private:
@@ -73,8 +82,34 @@ private:
     template<LogLevel level>
     static constexpr const char* getColor();
 
+    // Time stamp to add to messages
     static std::string getTimestamp();
+    // Determine if trace is allowed to spam console
+    static inline bool m_repeatTraceMessages = false;
 };
+
+// Create a timestamp format
+inline std::string Logger::getTimestamp()
+{
+    using namespace std::chrono;
+    // Get current time with high resolution
+    const auto now = system_clock::now();
+
+    // Convert to time_t for calendar time (seconds)
+    const auto in_time_t = system_clock::to_time_t(now);
+
+    // Extract milliseconds
+    const auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
+        now.time_since_epoch()) % 1000;
+
+    // Format date and time
+    const std::tm buffer = *std::localtime(&in_time_t);
+    std::ostringstream output;
+    output << "[" << std::put_time(&buffer, "%H:%M:%S")
+        << "." << std::setfill('0') << std::setw(3) << milliseconds.count() << "] [";
+
+    return output.str();
+}
 
 // Get the log level name depending on which macro is called
 template<>
@@ -104,31 +139,6 @@ constexpr const char* Logger::getColor<LogLevel::Error>() { return c_RED_WARNING
 template<>
 constexpr const char* Logger::getColor<LogLevel::Fatal>() { return c_RED_FATAL; }
 
-
-// Create a timestamp format
-inline std::string Logger::getTimestamp() {
-    using namespace std::chrono;
-    // Get current time with high resolution
-    const auto now = system_clock::now();
-
-    // Convert to time_t for calendar time (seconds)
-    const auto in_time_t = system_clock::to_time_t(now);
-
-    // Extract milliseconds
-    const auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
-        now.time_since_epoch()) % 1000;
-
-    // Format date and time
-    const std::tm buffer = *std::localtime(&in_time_t);
-    std::ostringstream output;
-    output << "[" << std::put_time(&buffer, "%H:%M:%S")
-        << "." << std::setfill('0') << std::setw(3) << milliseconds.count() << "] [";
-
-    return output.str();
-
-
-}
-
 // ### Macro setup ###
 #ifndef NDEBUG
 #define CLEAR_LOGGED_MESSAGES          Logger::clearLoggedMessages()
@@ -157,5 +167,3 @@ inline std::string Logger::getTimestamp() {
 #define LOG_ERROR(process, content)
 #define LOG_FATAL(process, content)
 #endif
-
-// TODO: Add assert

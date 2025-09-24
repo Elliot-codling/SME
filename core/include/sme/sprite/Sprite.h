@@ -6,8 +6,7 @@
 class Sprite : public SharedData
 {
 public:
-    Sprite(const char* objectId, const char* textureDir, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer);
-    Sprite(const char* objectId, const sf::Texture& textureFile, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer = 0);
+    Sprite(const char* objectId, sf::Texture* textureFile, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer = 0);
     ~Sprite() override;
 
     // ### Transforms ###
@@ -51,7 +50,7 @@ public:
 private:
     // Variables
     // TODO: Make a texture script which will load in a texture IF it hasnt done so already
-    sf::Texture* m_texture = new sf::Texture;
+    sf::Texture* m_texture;
     sf::Sprite m_sprite;
 
     sf::RectangleShape* m_debugRect = nullptr;

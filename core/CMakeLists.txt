@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
 project(SME)
 
-# Build SFML from source in external/src (explicit binary dir to avoid error)
-add_subdirectory(${CMAKE_SOURCE_DIR}/external/sfml ${CMAKE_BINARY_DIR}/external/sfml-build)
+# Build SFML from source in thirdparty/sfml (explicit binary dir to avoid error)
+add_subdirectory(${CMAKE_SOURCE_DIR}/thirdparty/sfml ${CMAKE_BINARY_DIR}/thirdparty/sfml-build)
 
 # Grab all cpp files from src
 file(GLOB_RECURSE ENGINE_SRC CONFIGURE_DEPENDS src/*.cpp)
@@ -22,3 +22,10 @@ endif()
 
 # Link SFML - must be public for game to use
 target_link_libraries(SME PUBLIC sfml-graphics sfml-window sfml-system)
+
+# Include the assets required for the core engine
+add_custom_command(
+        TARGET SME POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/external ${CMAKE_BINARY_DIR}/bin/external
+)
