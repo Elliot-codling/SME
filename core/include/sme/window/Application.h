@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <sme/events/WindowEvents.h>
 #include <sme/window/Renderer.h>
-#include <sme/log/logging.h>
+#include <sme/log/Logging.h>
 
 class Application : public WindowEvents, Renderer
 {

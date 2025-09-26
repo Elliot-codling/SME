@@ -1,7 +1,7 @@
 #pragma once
 #include <sme/sprite/Sprite.h>
 #include <sme/scene/Scene.h>
-#include <sme/log/logging.h>
+#include <sme/log/Logging.h>
 class Renderer
 {
 public:

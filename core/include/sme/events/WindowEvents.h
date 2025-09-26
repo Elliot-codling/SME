@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <sme/log/logging.h>
+#include <sme/log/Logging.h>
 
 // Used for events and inputs
 // Mouse input currently only supported

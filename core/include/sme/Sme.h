@@ -9,4 +9,4 @@
 #include <sme/scene/SceneManager.h>
 
 // Logging
-#include <sme/log/logging.h>
+#include <sme/log/Logging.h>

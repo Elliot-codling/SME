@@ -3,7 +3,7 @@
 static int windowWidth = 1280, windowHeight = 720;
 int main()
 {
-    Logger::setMinLogLevel(LogLevel::Trace);
+    Logger::setMinLogLevel(LogLevel::Debug);
     Logger::setTraceRepeatMessages(false);
     // Create runtime which will create the application
     // Runtime will control the flow of the code

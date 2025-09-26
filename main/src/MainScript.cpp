@@ -1,6 +1,10 @@
 // Main code
 #include "../include/MainScript.h"
 
+#include <cmath>
+
+#include "sme/log/Profiler.h"
+
 Sprite* mySprite;
 Text* myText;
 Scene* myScene;
@@ -17,7 +21,6 @@ void runtimeState::start(Application &app)
 
     mySprite = myScene->createSprite("player", Resources.loadTexture("assets/textures/spaceship.png"), {10, 10}, {64, 64});
     mySprite->setObjectVisible(true);
-    //app.stopRunning();
 }
 
 void runtimeState::update(Application &app, const float deltaTime)
@@ -27,6 +30,16 @@ void runtimeState::update(Application &app, const float deltaTime)
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
             app.stopRunning();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        {
+            double number;
+            START_WATCH();
+            for (int i = 0; i<10000000; i++)
+            {
+                number = 1 / sqrt(i);
+            }
+            STOP_WATCH("main/MainScript.cpp");
         }
     }
 }

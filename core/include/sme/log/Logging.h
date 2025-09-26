@@ -17,8 +17,6 @@ constexpr auto c_RED_WARNING = "\033[91m"; // Error
 constexpr auto c_RED_FATAL = "\033[1;101m"; // Fatal
 
 // TODO: Add a filter to show specific processes only
-// TODO: Add a performance profiler
-// TODO: Add assert
 
 // ### Emums ###
 enum class LogLevel {
@@ -36,33 +34,17 @@ public:
     static void setMinLogLevel(const LogLevel level) { m_minLevel = level; }
     static void setTraceRepeatMessages(const bool value) { m_repeatTraceMessages = value; }
     static void clearLoggedMessages() { m_loggedMessages.clear(); }
+    static bool filterMessages(LogLevel level, const std::string &key);
 
     template<LogLevel level, typename A, typename B>
     // Take in any value with templates
     static void log(const A &process, const B &content)
     {
-        // TODO: Move into private function in cpp
         // Make the keys unique to prevent important logs from being suppressed
         const std::string key = std::to_string(static_cast<int>(level)) + ":" + process + ":" + content;
-        if (level < m_minLevel)
+        if (!filterMessages(level, key))
         {
-            // Do not print anything under the specified log level
             return;
-        }
-
-        // Check if it is not unique
-        if (!m_loggedMessages.insert(key).second)
-        {
-            // Check if level is not Trace
-            if (level != LogLevel::Trace)
-            {
-                return;
-            }
-            // Check if repeat message is not true
-            if (!m_repeatTraceMessages)
-            {
-                return;
-            }
         }
 
         std::cout << getColor<level>()
@@ -148,7 +130,7 @@ constexpr const char* Logger::getColor<LogLevel::Fatal>() { return c_RED_FATAL; 
 #define LOG_WARN(process, content)     Logger::log<LogLevel::Warn>(process, content)
 #define LOG_ERROR(process, content)    Logger::log<LogLevel::Error>(process, content)
 #define LOG_FATAL(process, content)    Logger::log<LogLevel::Fatal>(process, content)
-#elif (_DEBUG)
+#elif _DEBUG
 #define CLEAR_LOGGED_MESSAGES()        Logging::clearLoggedMessages()
 #define LOG_TRACE(process, content)    Logger::log<LogLevel::Trace>(process, content)
 #define LOG_DEBUG(process, content)    Logger::log<LogLevel::Debug>(process, content)
