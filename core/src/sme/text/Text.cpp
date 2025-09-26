@@ -4,10 +4,10 @@
 Text::Text(const char* objectId, const char* message, const sf::Vector2f position, sf::Font* fontFile, const uint8_t fontSize)
 {
     setId(objectId);
-    LOG_TRACE("text/Text.cpp", std::format("Created 'Text' with ID={}", objectId));
+    LOG_TRACE("text/Text.cpp", fmt::format("Created 'Text' with ID={}", objectId));
     if (fontFile == nullptr)
     {
-        LOG_ERROR("text/Text.cpp", std::format("Failed to initiate 'Text' with ID={} font could not be found, rendering disabled", objectId));
+        LOG_ERROR("text/Text.cpp", fmt::format("Failed to initiate 'Text' with ID={} font could not be found, rendering disabled", objectId));
         return;
     }
     m_font = fontFile;
@@ -25,7 +25,7 @@ Text::Text(const char* objectId, const char* message, const sf::Vector2f positio
 
 Text::~Text()
 {
-    LOG_TRACE("text/Text.cpp", std::format("Destroying object with ID={}", getId()));
+    LOG_TRACE("text/Text.cpp", fmt::format("Destroying object with ID={}", getId()));
     //De-initialise object
     destroyObject();
 }
@@ -33,14 +33,14 @@ Text::~Text()
 // ### Text ###
 void Text::updateString(const char *newMessage)
 {
-    LOG_TRACE("text/Text.cpp", std::format("'updateString()' requested (ID={}) (message={})", getId(), newMessage));
+    LOG_TRACE("text/Text.cpp", fmt::format("'updateString()' requested (ID={}) (message={})", getId(), newMessage));
     m_text.setString(newMessage);
 }
 
 // ### Render ###
 void Text::render(sf::RenderTarget& target) const
 {
-    LOG_TRACE("text/Text.cpp", std::format("'render()' requested (ID={})", getId()));
+    LOG_TRACE("text/Text.cpp", fmt::format("'render()' requested (ID={})", getId()));
     if (!isObjectVisible())
     {
         return;

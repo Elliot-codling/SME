@@ -3,51 +3,51 @@
 // ### Get functions ###
 const char* SharedData::getId() const
 {
-    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", std::format("'getId()' requested (ID={})", m_id));
+    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", fmt::format("'getId()' requested (ID={})", m_id));
     return m_id;
 }
 uint8_t SharedData::getLayerNumber() const
 {
-    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", std::format("'getLayerNumber()' requested (int={})", m_layerNumber));
+    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", fmt::format("'getLayerNumber()' requested (int={})", m_layerNumber));
     return m_layerNumber;
 }
 sf::Vector2f SharedData::getOffset() const
 {
-    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", std::format("'getOffset()' requested (pos={},{})", m_offset.x, m_offset.y));
+    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", fmt::format("'getOffset()' requested (pos={},{})", m_offset.x, m_offset.y));
     return m_offset;
 }
 bool SharedData::isObjectVisible() const
 {
-    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", std::format("'isObjectVisible()' requested (bool={})", m_objectIsVisible));
+    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", fmt::format("'isObjectVisible()' requested (bool={})", m_objectIsVisible));
     return m_objectIsVisible;
 }
 
 // ### Set functions ###
 void SharedData::setId(const char *objectID)
 {
-    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", std::format("'setId()' requested (ID={})", objectID));
+    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", fmt::format("'setId()' requested (ID={})", objectID));
     m_id = objectID;
 }
 void SharedData::setLayerNumber(const uint8_t objectLayer)
 {
-    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", std::format("'setLayerNumber()' requested (int={})", objectLayer));
+    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", fmt::format("'setLayerNumber()' requested (int={})", objectLayer));
     m_layerNumber = objectLayer;
 }
 void SharedData::setObjectVisible(const bool isVisible)
 {
-    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", std::format("'setObjectVisible()' requested (bool={})", isVisible));
+    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", fmt::format("'setObjectVisible()' requested (bool={})", isVisible));
     m_objectIsVisible = isVisible;
 }
 void SharedData::setOffset(const sf::Vector2f objectOffset)
 {
-    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", std::format("'setOffset()' requested (pos={},{})", objectOffset.x, objectOffset.y));
+    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", fmt::format("'setOffset()' requested (pos={},{})", objectOffset.x, objectOffset.y));
     m_offset = objectOffset;
 }
 
 // ### Initialisation ###
 bool SharedData::isInitialised() const
 {
-    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", std::format("'isInitialised()' requested (bool={})", m_initialised));
+    LOG_TRACE("sharedObjectClass/SharedObjectClass.cpp", fmt::format("'isInitialised()' requested (bool={})", m_initialised));
     return m_initialised;
 }
 

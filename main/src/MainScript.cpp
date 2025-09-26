@@ -14,6 +14,7 @@ float rotationSpeed = 90.f;
 float sizeFactor = 0.9f;
 void runtimeState::start(Application &app)
 {
+
     myScene = sceneManager.createScene("main", 500);
     app.setActiveScene(myScene);
     myText = myScene->createText("text", "Hello World!", {0, 0}, Resources.loadFont("assets/font/SegoeMarker.ttf"), 60);

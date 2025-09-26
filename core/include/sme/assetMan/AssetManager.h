@@ -6,7 +6,7 @@
 class AssetManager
 {
 public:
-    AssetManager() { LOG_TRACE("assetMan/AssetManager.h", std::format("Creating 'AssetManager'")); }
+    AssetManager() { LOG_TRACE("assetMan/AssetManager.h", fmt::format("Creating 'AssetManager'")); }
     ~AssetManager();
 
     // ### Textures ###

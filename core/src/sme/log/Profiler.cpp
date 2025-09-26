@@ -11,5 +11,5 @@ void Profiler::stopWatchAndPrintResult(const std::string &process)
     using namespace std::chrono;
     end = system_clock::now();
     const duration<double> timeElapsed = end - start;
-    LOG_DEBUG(process, std::format("Computation completed in: {}", timeElapsed.count()));
+    LOG_DEBUG(process, fmt::format("Computation completed in: {}", timeElapsed.count()));
 }

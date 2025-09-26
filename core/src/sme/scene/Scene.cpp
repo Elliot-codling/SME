@@ -1,10 +1,11 @@
 #include <iostream>
 #include <sme/scene/Scene.h>
+#include <fmt/format.h>
 
 // ### Constructor ###
 Scene::Scene(const char* sceneName, const uint32_t vectorSize)
 {
-    LOG_INFO("scene/Scene.cpp", std::format("Created 'Scene' with ID={}", sceneName));
+    LOG_INFO("scene/Scene.cpp", fmt::format("Created 'Scene' with ID={}", sceneName));
     // Set name and vector size
     m_sceneName = sceneName;
     m_spriteList.reserve(vectorSize);
@@ -22,7 +23,7 @@ Scene::Scene(const char* sceneName, const uint32_t vectorSize)
  */
 Sprite* Scene::createSprite(const char* objectId, sf::Texture* textureFile, sf::Vector2f position, sf::Vector2f size, uint8_t objectLayer)
 {
-    LOG_TRACE("scene/Scene.cpp", std::format("Created 'Sprite' with ID={}", objectId));
+    LOG_TRACE("scene/Scene.cpp", fmt::format("Created 'Sprite' with ID={}", objectId));
     auto* newSprite = new Sprite(objectId, textureFile, position, size, objectLayer);
     if (m_spriteList.size() >= m_spriteList.capacity()) {
         LOG_ERROR("","");
@@ -44,7 +45,7 @@ Sprite* Scene::createSprite(const char* objectId, sf::Texture* textureFile, sf::
 
 Text* Scene::createText(const char* objectId, const char* message, const sf::Vector2f position, sf::Font* fontFile, const uint8_t fontSize)
 {
-    LOG_TRACE("scene/Scene.cpp", std::format("Created 'Text' with ID={}", objectId));
+    LOG_TRACE("scene/Scene.cpp", fmt::format("Created 'Text' with ID={}", objectId));
     auto* newText = new Text(objectId, message, position, fontFile, fontSize);
     if (!newText->isInitialised())
     {
@@ -71,7 +72,7 @@ std::vector<size_t>* Scene::getSpriteRenderQueue()
 }
 const char* Scene::getSceneName() const
 {
-    LOG_TRACE("scene/Scene.cpp", std::format("'getSceneName()' requested (name={})", m_sceneName));
+    LOG_TRACE("scene/Scene.cpp", fmt::format("'getSceneName()' requested (name={})", m_sceneName));
     return m_sceneName;
 }
 

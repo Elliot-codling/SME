@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <sstream>
 #include <unordered_set>
+#include <fmt/format.h>
 
 // ### Log colour codes ###
 constexpr auto c_DEFAULT = "\033[39;49m";

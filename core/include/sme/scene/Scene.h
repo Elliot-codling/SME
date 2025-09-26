@@ -1,11 +1,12 @@
 #pragma once
 #include <sme/sprite/Sprite.h>
 #include <sme/text/Text.h>
+#include <fmt/format.h>
 class Scene
 {
 public:
     Scene(const char* sceneName, uint32_t vectorSize);
-    ~Scene() { LOG_TRACE("scene/Scene.h", std::format("Destroying object with ID={}", m_sceneName)); }
+    ~Scene() { LOG_TRACE("scene/Scene.h", fmt::format("Destroying object with ID={}", m_sceneName)); }
 
     // ### Creation ###
     // --- Sprite ---

@@ -2,6 +2,7 @@
 
 #include <sme/log/Logging.h>
 #include <chrono>
+#include <fmt/format.h>
 
 class Profiler
 {

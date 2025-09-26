@@ -21,7 +21,7 @@ bool Application::createWindow(const char *titleName, const int width, const int
 
 bool Application::isRunning() const
 {
-    LOG_TRACE("window/Application.cpp", std::format("'isRunning()' requested (bool={})", m_windowIsOpen));
+    LOG_TRACE("window/Application.cpp", fmt::format("'isRunning()' requested (bool={})", m_windowIsOpen));
     return m_windowIsOpen;
 }
 
@@ -56,33 +56,31 @@ sf::Vector2f Application::getMousePos()
 }
 // -------------------
 
-
-
 // ### Scene control ###
 Scene* Application::getActiveScene() const
 {
-    LOG_TRACE("window/Application.cpp", std::format("'getActiveScene()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));
+    LOG_TRACE("window/Application.cpp", fmt::format("'getActiveScene()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));
     return m_activeScene;
 }
 void Application::setActiveScene(Scene* scene)
 {
-    LOG_TRACE("window/Application.cpp", std::format("'setActiveScene()' requested (scene={})", scene->getSceneName()));
+    LOG_TRACE("window/Application.cpp", fmt::format("'setActiveScene()' requested (scene={})", scene->getSceneName()));
     m_activeScene = scene;
 }
 
 // ### Display control ###
 void Application::setBackgroundColor(const sf::Color backgroundColor)
 {
-    LOG_TRACE("window/Application.cpp", std::format("'setBackgroundColor()' requested (color=r:{},g:{},b:{},a:{})", backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a));
+    LOG_TRACE("window/Application.cpp", fmt::format("'setBackgroundColor()' requested (color=r:{},g:{},b:{},a:{})", backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a));
     m_backgroundColor = backgroundColor;
 }
 void Application::updateBlankDisplay()
 {
-    LOG_TRACE("window/Application.cpp", std::format("'updateBlankDisplay()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));
+    LOG_TRACE("window/Application.cpp", fmt::format("'updateBlankDisplay()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));
     Renderer::renderBlankScene(m_window, m_backgroundColor);
 }
 void Application::updateDisplay()
 {
-    LOG_TRACE("window/Application.cpp", std::format("'updateDisplay()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));
+    LOG_TRACE("window/Application.cpp", fmt::format("'updateDisplay()' requested (scene={})", m_activeScene ? m_activeScene->getSceneName() : "nullptr"));
     Renderer::renderScene(m_window, m_backgroundColor, m_activeScene);
 }

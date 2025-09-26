@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <sme/log/Logging.h>
+#include <fmt/format.h>
 // Sprite and Text objects will share some functions
 // This class will be inherited between them
 // Nodiscard -> warn users if a get function is called but not used in program

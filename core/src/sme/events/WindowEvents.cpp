@@ -36,6 +36,6 @@ bool WindowEvents::getEvent(bool &windowOpen, const sf::Event::EventType eventTy
 sf::Vector2f WindowEvents::getMousePos(const sf::RenderWindow &target)
 {
     const sf::Vector2f mousePos = {static_cast<float>(sf::Mouse::getPosition(target).x) , static_cast<float>(sf::Mouse::getPosition(target).y)};
-    LOG_TRACE("events/WindowEvents.cpp", std::format("'getMousePos()' requested (pos={},{})", mousePos.x, mousePos.y));
+    LOG_TRACE("events/WindowEvents.cpp", fmt::format("'getMousePos()' requested (pos={},{})", mousePos.x, mousePos.y));
     return mousePos;
 }

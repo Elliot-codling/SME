@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <sme/sharedObjectClass/SharedObjectClass.h>
 #include <sme/log/Logging.h>
+#include <fmt/format.h>
 
 class Sprite : public SharedData
 {

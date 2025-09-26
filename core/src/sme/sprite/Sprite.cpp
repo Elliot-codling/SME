@@ -4,7 +4,7 @@
 Sprite::Sprite(const char* objectId, sf::Texture* textureFile, const sf::Vector2f position, const sf::Vector2f size, const uint8_t objectLayer)
 {
     setId(objectId);
-    LOG_TRACE("sprite/Sprite.cpp", std::format("Created 'Sprite' with ID={}", objectId));
+    LOG_TRACE("sprite/Sprite.cpp", fmt::format("Created 'Sprite' with ID={}", objectId));
     m_texture = textureFile;
     // Apply texture and position
     m_sprite.setTexture(*m_texture);
@@ -18,7 +18,7 @@ Sprite::Sprite(const char* objectId, sf::Texture* textureFile, const sf::Vector2
 }
 Sprite::~Sprite()
 {
-    LOG_TRACE("sprite/Sprite.cpp", std::format("Destroying object with ID={}", getId()));
+    LOG_TRACE("sprite/Sprite.cpp", fmt::format("Destroying object with ID={}", getId()));
     destroyObject();
 }
 
@@ -26,7 +26,7 @@ Sprite::~Sprite()
 // ### Debugging tools ###
 void Sprite::setDebugActive(const sf::Color color)
 {
-    LOG_INFO("sprite/Sprite.cpp", std::format("'setDebugActive()' requested (ID={}) debug active", getId()));
+    LOG_INFO("sprite/Sprite.cpp", fmt::format("'setDebugActive()' requested (ID={}) debug active", getId()));
     m_debugRect = new sf::RectangleShape;
     m_debugRect->setSize(getSize());
     m_debugRect->setFillColor(color);
