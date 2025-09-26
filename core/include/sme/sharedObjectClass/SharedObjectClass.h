@@ -19,9 +19,9 @@ public:
 
     // ### Set functions ###
     void setId(const char* objectID);
-    void setLayerNumber(const uint8_t objectLayer);
-    void setObjectVisible(const bool isVisible);
-    virtual void setOffset(const sf::Vector2f objectOffset);
+    void setLayerNumber(uint8_t objectLayer);
+    void setObjectVisible(bool isVisible);
+    virtual void setOffset(sf::Vector2f objectOffset);
 
     // ### Initialisation ###
     [[nodiscard]] bool isInitialised() const;
