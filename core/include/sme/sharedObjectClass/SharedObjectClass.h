@@ -6,7 +6,6 @@
 // This class will be inherited between them
 // Nodiscard -> warn users if a get function is called but not used in program
 
-// TODO: Add log to this file
 class SharedData
 {
 public:
