@@ -84,6 +84,6 @@ void runtimeState::fixedUpdate(Application &app, const float deltaTime)
 
 void runtimeState::end()
 {
-    delete mySprite;
-    delete myText;
+    //delete mySprite;
+    //delete myText;
 }

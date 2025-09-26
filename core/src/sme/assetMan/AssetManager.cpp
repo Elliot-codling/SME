@@ -1,6 +1,11 @@
 #include <sme/assetMan/AssetManager.h>
 
 
+AssetManager::~AssetManager()
+{
+    LOG_TRACE("assetMan/AssetManager.cpp", std::format("Destroying 'AssetManager'"));
+}
+
 // ### Textures ###
 sf::Texture* AssetManager::loadTexture(const char* textureDir)
 {
@@ -33,7 +38,7 @@ sf::Texture* AssetManager::loadTexture(const char* textureDir)
     if (texture.loadFromFile(externalTextureDir))
     {
         // Found external file, return texture and store in m_texturePool
-        m_texturePool.emplace(textureDir, texture);
+        m_texturePool.emplace(textureDir, std::move(texture));
         return &(m_texturePool.at(textureDir));
     }
 
@@ -47,9 +52,9 @@ sf::Font* AssetManager::loadFont(const char* fontDir)
 {
     LOG_TRACE("assetMan/AssetManager.cpp", "'loadFont()' requested");
     // Check if the font can be found and return a pointer to the memory location
-    if (sf::Font* font = findCachedFont(fontDir); font != nullptr)
+    if (sf::Font* cachedFont = findCachedFont(fontDir); cachedFont != nullptr)
     {
-        return font;
+        return cachedFont;
     }
 
     // Load a new font as requested, font is not present in m_fontPool
@@ -75,7 +80,7 @@ sf::Font* AssetManager::loadFont(const char* fontDir)
     if (font.loadFromFile(externalFontDir))
     {
         // Found external file, return font and store in m_fontPool
-        m_fontPool.emplace(fontDir, font);
+        m_fontPool.emplace(fontDir, std::move(font));
         return &(m_fontPool.at(fontDir));
     }
 

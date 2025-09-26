@@ -17,7 +17,7 @@ target_include_directories(SME PUBLIC
 
 # Force SFML to be static (except on Linux)
 if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    target_compile_definitions(SME PUBLIC SFML_STATIC)
+    set(SFML_STATIC_LIBRARIES TRUE)
 endif()
 
 # Link SFML - must be public for game to use

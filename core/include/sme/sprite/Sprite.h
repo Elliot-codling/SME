@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <sme/SharedObjectClass.h>
+#include <sme/sharedObjectClass/SharedObjectClass.h>
 #include <sme/log/Logging.h>
 
 class Sprite : public SharedData

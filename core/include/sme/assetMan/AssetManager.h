@@ -6,8 +6,8 @@
 class AssetManager
 {
 public:
-    AssetManager() { LOG_TRACE("assetMan/AssetManager.h", std::format("Creating 'AssetManager'")); };
-    ~AssetManager() { LOG_TRACE("assetMan/AssetManager.h", std::format("Destroying 'AssetManager'")); };
+    AssetManager() { LOG_TRACE("assetMan/AssetManager.h", std::format("Creating 'AssetManager'")); }
+    ~AssetManager();
 
     // ### Textures ###
     sf::Texture* loadTexture(const char* textureDir);
